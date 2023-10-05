@@ -11,6 +11,8 @@ plugins=(git)
 # command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 
+source ~/.config/zsh/functions.sh
+
 # zsh-autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
