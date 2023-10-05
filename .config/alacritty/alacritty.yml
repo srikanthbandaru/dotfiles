@@ -1,0 +1,34 @@
+live_config_reload: true
+
+window:
+  padding:
+    x: 10
+    y: 10
+  dynamic_padding: false
+  opacity: 0.94
+  decorations: buttonless
+
+font:
+  normal:
+    family: UbuntuMono Nerd Font
+    style:  Regular
+  bold:
+    family: UbuntuMono Nerd Font
+    style:  Bold
+  italic:
+    family: UbuntuMono Nerd Font
+    style:  Italic
+  bold_italic:
+    family: UbuntuMono Nerd Font
+    style: Bold Italic
+  size: 17.0
+  offset:
+      x: 1    # For letter spacing (default: 0).
+      y: 4    # For line spacing (default: 0).
+draw_bold_text_with_bright_colors: true
+
+import:
+  - ~/.config/alacritty/catppuccin-mocha.yml
+
+key_bindings:
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
