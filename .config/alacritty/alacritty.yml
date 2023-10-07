@@ -34,4 +34,6 @@ import:
   - ~/.config/alacritty/catppuccin-mocha.yml
 
 key_bindings:
-  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+  - { key: Return, mods: Shift, action: SpawnNewInstance }
+  - { key: F, mods: Control, chars: "fuzzy_navigate\n" }
+  # - { key: F, mods: Control, command: { program: "zsh", args: ["-c", "fuzzy_navigate"] } }
