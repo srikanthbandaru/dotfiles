@@ -6,6 +6,11 @@ lazy_load_nvm() {
     [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 }
 
+npx() {
+    lazy_load_nvm
+    npx $@
+}
+
 npm() {
     lazy_load_nvm
     npm $@
@@ -44,6 +49,7 @@ python() {
     python $@
 }
 
+# fuzzy_navigate
 function fuzzy_navigate() {
     local item
     item=$(
