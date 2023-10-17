@@ -72,3 +72,17 @@ function fuzzy_navigate() {
         fi
     fi
 }
+
+# function cheat_sheet() {
+#     languages=$(echo "typescript javascript bash react | tr " " "\n")
+#     core_utils=$(echo "git docker find grep | tr ' ' '\n'")
+#     selected=$(echo -e "$languages\n$core_utils" | fzf --preview 'cheat {}' --preview-window=down:20%:wrap)
+
+#     read -p "Query: " query
+
+#     if echo "$languages" | grep -qs "$selected"; then
+#         curl "cht.sh/$selected/$(echo $query | tr ' ' '+')"
+#     elif echo "$core_utils" | grep -qs "$selected"; then
+#         curl "cht.sh/$selected~$query"
+#     fi
+# }
