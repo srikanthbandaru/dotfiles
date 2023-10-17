@@ -1,6 +1,12 @@
 # nvm, node, npm, pnpm
 lazy_load_nvm() {
-    unset -f npm node nvm
+    # Check and unset if they exist
+    typeset -f npm >/dev/null && unset -f npm
+    typeset -f node >/dev/null && unset -f node
+    typeset -f nvm >/dev/null && unset -f nvm
+    typeset -f npx >/dev/null && unset -f npx
+    typeset -f pnpm >/dev/null && unset -f pnpm
+
     export NVM_DIR=~/.nvm
     [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
@@ -49,46 +55,51 @@ python() {
     python $@
 }
 
-# fuzzy_navigate
-function fuzzy_navigate() {
-    local item
-    item=$(
-        find -L . -maxdepth 2 \
-            -not -path "./.git/*" \
-            -not -path "./Library" \
-            -not -path "./Library/*" \
-            -not -path "./Desktop" \
-            -not -path "./Desktop/*" \
-            -not -path "./Documents" \
-            -not -path "./Documents/*" \
-            -not -path "./Downloads" \
-            -not -path "./Downloads/*" \
-            -not -path "./OneDrive - Bayer" \
-            -not -path "./OneDrive - Bayer/*" \
-            -not -path "./.Trash" \
-            -not -path "./.Trash/*" 2>/dev/null |
-            fzf --preview 'bat --color=always --style=numbers {}' --preview-window=down:20%:wrap
+# Cheat Sheet
+function fetch_cheat() {
+    local language="$1"
+    local query="$2"
+    curl -s "https://cht.sh/$language/$(echo $query | tr ' ' '+')?T" | bat --pager="less -R" -l "$3"
+}
+
+function cheat_sheet() {
+    local languages="typescript\njavascript\nbash\nreact"
+    local core_utils="git\ndocker\nfind\ngrep"
+
+    # Combine languages and core_utils into one list and use fzf to select an item
+    local selected=$(echo -e "$languages\n$core_utils" | fzf --preview 'cheat {}' --preview-window=down:20%:wrap)
+
+    # Exit if nothing was selected
+    [ -z "$selected" ] && return
+
+    # Prompt user for a query
+    print -n "Query: "
+    read query
+
+    # Associative array for mapping language/tool to bat language type
+    declare -A lang_map=(
+        [typescript]="ts"
+        [javascript]="js"
+        [bash]="sh"
+        [react]="jsx"
+        [git]="sh"
+        [docker]="sh"
+        [find]="sh"
+        [grep]="sh"
     )
 
-    if [[ -n $item ]]; then
-        if [[ -d $item ]]; then
-            cd "$item"
-        elif [[ -f $item ]]; then
-            nvim "$item"
-        fi
+    # If the selected item exists in the lang_map, fetch and highlight using the mapped value
+    if [[ ${lang_map[$selected]} ]]; then
+        fetch_cheat "$selected" "$query" "${lang_map[$selected]}"
+    else
+        # Default case: just fetch without specific highlighting
+        fetch_cheat "$selected" "$query" "txt"
     fi
 }
 
-# function cheat_sheet() {
-#     languages=$(echo "typescript javascript bash react | tr " " "\n")
-#     core_utils=$(echo "git docker find grep | tr ' ' '\n'")
-#     selected=$(echo -e "$languages\n$core_utils" | fzf --preview 'cheat {}' --preview-window=down:20%:wrap)
-
-#     read -p "Query: " query
-
-#     if echo "$languages" | grep -qs "$selected"; then
-#         curl "cht.sh/$selected/$(echo $query | tr ' ' '+')"
-#     elif echo "$core_utils" | grep -qs "$selected"; then
-#         curl "cht.sh/$selected~$query"
-#     fi
-# }
+# dedupeAndSortZshHistory
+function dedupeAndSortZshHistory() {
+    local data
+    data=$(cat $HOME/.config/zsh/.zsh_history)
+    echo "$data" | sort | awk '!a[$0]++' >$HOME/.config/zsh/.zsh_history
+}
