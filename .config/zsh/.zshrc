@@ -14,5 +14,8 @@ alias extractSubs="awk '/-->/ {g=1; next} /-->/ {g=0} g' output.en.vtt | sed -e 
 # starship prompt
 eval "$(starship init zsh)"
 
+# fnm - faster nvm
+eval "$(fnm env --use-on-cd)"
+
 # FIXME: Why is this not working?
 setopt nomatch
