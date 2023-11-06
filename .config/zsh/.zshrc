@@ -4,6 +4,11 @@ plugins=(git)
 source ~/.config/zsh/functions.sh
 source ~/.config/zsh/fuzzy_navigate.sh
 
+# source my work config
+if [[ -f ~/.zshrc-work ]]; then
+    source ~/.zshrc-work
+fi
+
 # zsh-autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
