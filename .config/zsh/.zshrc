@@ -9,6 +9,9 @@ if [[ -f ~/.zshrc-work ]]; then
     source ~/.zshrc-work
 fi
 
+# Always enable colored `grep` output
+export GREP_OPTIONS="--color=auto"
+
 # zsh-autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
