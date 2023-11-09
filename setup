@@ -1,0 +1,285 @@
+#!/usr/bin/env bash
+set -e -u
+
+# Configurations
+GHUSER=${GHUSER:-srikanthbandaru}
+REPO=${REPO:-dotfiles}
+DEST=${DEST:-${HOME}/projects}
+DIR="${DEST}/${REPO}"
+SSH_KEY_TYPE="ed25519"
+SSH_KEY_PATH="${HOME}/.ssh/id_${SSH_KEY_TYPE}"
+
+# Show variables
+show_variables() {
+    echo "Configurations:"
+    echo "    - GH Username:  ${GHUSER}"
+    echo "    - Repository:   ${REPO}"
+    echo "    - Destination:  ${DEST}"
+    echo "    - SSH key type: ${SSH_KEY_TYPE}"
+}
+
+# Install Command Line Tools
+install_command_line_tools() {
+    if [[ -d /Library/Developer/CommandLineTools ]]; then
+        echo "Command Line Tools is already installed."
+        return
+    fi
+
+    echo "Installing Command Line Tools..."
+    xcode-select --install
+
+    # Wait until Command Line Tools is installed
+    echo "Waiting for Command Line Tools to be installed..."
+    while [[ ! -d /Library/Developer/CommandLineTools ]]; do
+        sleep 30
+    done
+
+    echo "Command Line Tools installed successfully!"
+}
+
+# Install Oh My Zsh
+install_oh_my_zsh() {
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        echo "Installing Oh My Zsh..."
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    else
+        echo "Oh My Zsh is already installed."
+    fi
+}
+
+# Show ~/Library folder
+configure() {
+    echo "Setting to show ~/Library..."
+    chflags nohidden ~/Library
+
+    #TODO: Add home directory to Finder favorites
+
+    # Adjust Delay Until Delay
+    defaults write -g InitialKeyRepeat -int 15
+    # Adjust Key Repeat Rate
+    defaults write -g KeyRepeat -int 2
+}
+
+# Generate SSH Key
+generate_ssh_key() {
+    if [[ -f "$SSH_KEY_PATH" ]]; then
+        echo "Your SSH key already exists."
+        return
+    fi
+
+    echo "Generating an SSH key..."
+    read -p "Type your email address: " email
+    ssh-keygen -t "$SSH_KEY_TYPE" -C "$email"
+
+    echo "Adding your SSH key to your ssh-agent..."
+    eval "$(ssh-agent -s)"
+    ssh-add "$SSH_KEY_PATH"
+
+    # Add SSH key to the ssh-agent
+    # SSH_CONFIG="$HOME/.ssh/config"
+    # if [[ ! -f "$SSH_CONFIG" ]]; then
+    #     touch "$SSH_CONFIG"
+    # fi
+
+    # # Check if configuration exists for github.com
+    # if ! grep -q "Host github.com" "$SSH_CONFIG"; then
+    #     echo "Configuring SSH for GitHub..."
+    #     echo "Host github.com" >>"$SSH_CONFIG"
+    #     echo "  AddKeysToAgent yes" >>"$SSH_CONFIG"
+    #     echo "  UseKeychain yes" >>"$SSH_CONFIG"
+    #     echo "  IdentityFile $SSH_KEY_PATH" >>"$SSH_CONFIG"
+    # fi
+}
+
+# Prompt for adding SSH key to GitHub
+ssh_prompt_confirmation() {
+    echo "Copying your SSH public key into your clipboard..."
+    pbcopy <"$SSH_KEY_PATH.pub"
+
+    echo "Now you should add the generated key to GitHub before proceeding."
+    while true; do
+        read -p "Have you added the SSH key to GitHub? [Y/n] " yn
+        case $yn in
+        [Yy]* | '')
+            echo "Proceeding..."
+            break
+            ;;
+        [Nn]*)
+            echo "Stopped."
+            exit 1
+            ;;
+        esac
+    done
+}
+
+# Install Homebrew
+install_homebrew() {
+    if command -v brew >/dev/null; then
+        echo "Homebrew is already installed."
+        return
+    fi
+
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    local homebrew_home=$(brew --prefix)
+    local zprofile="${HOME}/.zprofile"
+
+    echo "Adding environment variables to $zprofile..."
+    if ! grep -q 'eval $(/opt/homebrew/bin/brew shellenv)' "$zprofile"; then
+        echo '# Homebrew' >>"$zprofile"
+        echo "eval $('${homebrew_home}/bin/brew shellenv')" >>"$zprofile"
+    fi
+
+    eval $(${homebrew_home}/bin/brew shellenv)
+
+    echo "Running 'brew doctor'..."
+    brew doctor
+}
+
+function install_homebrew_packages() {
+    # Update Homebrew itself
+    echo "Updating Homebrew..."
+    brew update
+
+    # Tap extra repositories
+    local taps=(
+        "oven-sh/bun"
+        "homebrew/cask-fonts"
+    )
+
+    echo "Tapping extra repositories..."
+    for tap in "${taps[@]}"; do
+        brew tap "$tap"
+    done
+
+    # Install Homebrew formulae
+    local formulas=(
+        "font-ubuntu-mono-nerd-font"
+        "koekeishiya/formulae/yabai"
+        "koekeishiya/formulae/skhd"
+        "bun"
+        "starship"
+        "yt-dlp"
+        "ffmpeg"
+        "fprobe"
+        "neovim"
+        "ripgrep"
+        "fzf"
+        "bat"
+        "tmux"
+        "zsh-autosuggestions"
+    )
+
+    echo "Installing Homebrew formulae..."
+    for formula in "${formulas[@]}"; do
+        brew install "$formula"
+    done
+
+    # Install Homebrew Casks
+    local casks=(
+        "vscodium"
+    )
+
+    echo "Installing Homebrew casks..."
+    for cask in "${casks[@]}"; do
+        if ! brew list --cask "$cask" >/dev/null; then
+            brew install --cask "$cask"
+        else
+            echo "$cask is already installed. Skipping."
+        fi
+    done
+
+    echo "Installation complete."
+}
+
+function install_fnm_and_node_versions() {
+    echo "Installing fnm..."
+    brew install fnm
+
+    echo "Installing Node.js 18..."
+    fnm install 18
+
+    echo "Installation of fnm and Node.js versions complete."
+}
+
+function install_pyenv_and_python_versions() {
+    echo "Installing pyenv..."
+    brew install pyenv
+
+    echo "Installing Python 3.9..."
+    pyenv install 3.9
+    echo "Installing Python 3.11..."
+    pyenv install 3.11
+
+    echo "Installation of pyenv and Python versions complete."
+}
+
+function setup_simple_bar() {
+    echo "Installing simple-bar..."
+    mkdir -p "$HOME/Library/Application Support/Übersicht/widgets"
+    git clone https://github.com/Jean-Tinland/simple-bar.git "$HOME/Library/Application Support/Übersicht/widgets/simple-bar"
+    sudo ln -s /opt/homebrew/bin/yabai /usr/local/bin/yabai
+}
+
+# Clone my dotfiles GitHub repository
+clone_dotfiles_repo() {
+    if [[ -d "${DIR}" ]]; then
+        echo "Repository already exists."
+        return
+    fi
+
+    git clone git@github.com:${GHUSER}/${REPO}.git
+    cd ${DIR}
+}
+
+link_dotfiles() {
+    local current_dir="$PWD"
+
+    # Linking directories in ~/.config
+    echo "Linking directories to ~/.config..."
+    cd ~/projects/dotfiles/.config
+    for dir in *; do
+        # Check if symlink or directory doesn't already exist
+        if [ ! -e ~/.config/"$dir" ]; then
+            ln -s "$PWD/$dir" ~/.config/
+            echo "Linked $dir to ~/.config/"
+        else
+            echo "~/.config/$dir already exists. Skipping."
+        fi
+    done
+
+    # Linking individual dotfiles to ~
+    echo "Linking dotfiles to home directory..."
+    for file in ~/projects/dotfiles/.*; do
+        base_name=$(basename "$file")
+        # Check if it's a file and doesn't already exist in ~
+        if [ -f "$file" ] && [ ! -e ~/"$base_name" ]; then
+            ln -s "$file" ~/
+            echo "Linked $base_name to ~/"
+        elif [ -e ~/"$base_name" ]; then
+            echo "~/$base_name already exists. Skipping."
+        fi
+    done
+
+    cd "$current_dir"
+}
+
+# Run the above functions
+run() {
+    show_variables
+    install_command_line_tools
+    install_oh_my_zsh
+    configure
+    generate_ssh_key
+    ssh_prompt_confirmation
+    install_homebrew
+    install_homebrew_packages
+    install_fnm_and_node_versions
+    install_pyenv_and_python_versions
+    setup_simple_bar
+    clone_dotfiles_repo
+    link_dotfiles
+}
+
+run
