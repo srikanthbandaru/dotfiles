@@ -48,7 +48,7 @@ install_oh_my_zsh() {
 }
 
 # Show ~/Library folder
-configure() {
+setupMacPreferences() {
     echo "Setting to show ~/Library..."
     chflags nohidden ~/Library
 
@@ -270,7 +270,7 @@ run() {
     show_variables
     install_command_line_tools
     install_oh_my_zsh
-    configure
+    setupMacPreferences
     generate_ssh_key
     ssh_prompt_confirmation
     install_homebrew
