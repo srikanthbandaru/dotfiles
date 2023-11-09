@@ -114,7 +114,7 @@ ssh_prompt_confirmation() {
 
 # Install Homebrew
 install_homebrew() {
-    if command -v brew >/dev/null; then
+    if [[ -f /usr/local/bin/brew ]]; then
         echo "Homebrew is already installed."
         return
     fi
@@ -122,15 +122,13 @@ install_homebrew() {
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    local homebrew_home=$(brew --prefix)
-    local zprofile="${HOME}/.zprofile"
-
-    echo "Adding environment variables to $zprofile..."
-    if ! grep -q 'eval $(/opt/homebrew/bin/brew shellenv)' "$zprofile"; then
-        echo '# Homebrew' >>"$zprofile"
-        echo "eval $('${homebrew_home}/bin/brew shellenv')" >>"$zprofile"
+    echo "Adding environment variables to $HOME/.zprofile..."
+    local homebrew_home=/usr/local
+    if [[ $(sysctl -n machdep.cpu.brand_string) =~ 'Apple' ]]; then
+        homebrew_home=/opt/homebrew
     fi
-
+    echo '# Homebrew' >>$HOME/.zprofile
+    echo 'eval $('${homebrew_home}'/bin/brew shellenv)' >>$HOME/.zprofile
     eval $(${homebrew_home}/bin/brew shellenv)
 
     echo "Running 'brew doctor'..."
