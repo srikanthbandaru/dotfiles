@@ -27,3 +27,6 @@ eval "$(fnm env --use-on-cd)"
 
 # FIXME: Why is this not working?
 setopt nomatch
+
+# bun completions
+[ -s "/Users/glkni/.bun/_bun" ] && source "/Users/glkni/.bun/_bun"

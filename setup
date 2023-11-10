@@ -201,6 +201,11 @@ function install_fnm_and_node_versions() {
     echo "Installation of fnm and Node.js versions complete."
 }
 
+function install_bun() {
+    echo "Installing bun..."
+    curl -fsSL https://bun.sh/install | bash
+}
+
 function install_pyenv_and_python_versions() {
     echo "Installing pyenv..."
     brew install pyenv
@@ -277,7 +282,6 @@ link_dotfiles() {
     cd "$current_dir"
 }
 
-
 # Run the above functions
 run() {
     show_variables
@@ -289,6 +293,7 @@ run() {
     install_homebrew
     install_homebrew_packages
     install_fnm_and_node_versions
+    install_bun
     install_pyenv_and_python_versions
     setup_simple_bar
     clone_dotfiles_repo
