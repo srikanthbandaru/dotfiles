@@ -260,8 +260,23 @@ link_dotfiles() {
         fi
     done
 
+    echo "Linking Visual Studio Code settings.json..."
+    local vscodium_settings_dir="$HOME/Library/Application Support/VSCodium/User"
+    local vscodium_settings_file="settings.json"
+
+    if [ -f "$vscodium_settings_dir/$vscodium_settings_file" ] && [ ! -L "$vscodium_settings_dir/$vscodium_settings_file" ]; then
+        mv "$vscodium_settings_dir/$vscodium_settings_file" "$vscodium_settings_dir/$vscodium_settings_file.backup"
+    fi
+
+    # Ensure the vscode directory exists in dotfiles
+    mkdir -p ~/projects/dotfiles/vscode
+    # Link the file
+    ln -sf "$current_dir/vscode/$vscodium_settings_file" "$vscodium_settings_dir/$vscodium_settings_file"
+    echo "Linked Visual Studio Code settings.json to $vscodium_settings_dir"
+
     cd "$current_dir"
 }
+
 
 # Run the above functions
 run() {
