@@ -7,47 +7,42 @@ Automate your macOS developer environment setup with this convenient bash script
 
 ## Core Setup
 
-- Package Manager: Homebrew (A)
-- Automation: ansible (A)
-- System: command line tools (A)
+- Homebrew (A)
+- Command line tools (A)
 
 ## Development Environment
 
-- Terminal: [Alacritty](https://alacritty.org/) (M)
-- Shell Enhancements: oh-my-zsh (A)
-- Shell Prompt: Starship (A)
-- Editor
-  - Neovim (A)
-  - VSCodium (A)
-- Search Tool: ripgrep (A)
+- [Alacritty](https://alacritty.org/) (M)
+- oh-my-zsh (A)
+- Starship (A)
+- Neovim (A)
+- VSCodium (A)
 
 ## Runtimes & Languages
 
-- JavaScript: Node.js (via fnm) (A)
-- Python: Python (via pyenv) (A)
+- Node.js (via fnm) (A)
+- Python (via pyenv) (A)
 
 ## Software
 
-- Cleaner: [Appcleaner](https://freemacsoft.net/appcleaner/) (M)
-- Containerization: [Docker](https://www.docker.com/) (M)
-- Web Browsers:
-  - Safari
-  - [Google Chrome](https://www.google.com/chrome/) (M)
-  - [Firefox](https://www.mozilla.org/en-US/firefox/new/) (M)
-- Cloud Storage: [Google Drive](https://www.google.com/drive/download/) (M)
-- Customization
-  - [Ubersicht](https://tracesof.net/uebersicht/) [M]
-  - [simple-bar](https://github.com/Jean-Tinland/simple-bar) [A]
+- [Appcleaner](https://freemacsoft.net/appcleaner/) (M)
+- [Docker](https://www.docker.com/) (M)
+- Safari
+- [Google Chrome](https://www.google.com/chrome/) (M)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/) (M)
+- [Google Drive](https://www.google.com/drive/download/) (M)
+- [Ubersicht](https://tracesof.net/uebersicht/) [M]
+- [simple-bar](https://github.com/Jean-Tinland/simple-bar) [A]
 
 ## Productivity Tools
 
-- Note-taking: [Notion](https://www.notion.so/desktop) (M)
-- Task Management: [Todoist](https://todoist.com/downloads) (M)
+- [Notion](https://www.notion.so/desktop) (M)
+- [Todoist](https://todoist.com/downloads) (M)
 
 ## Education & Reading
 
-- Flashcards: [Anki](https://apps.ankiweb.net/) (M)
-- e-Reader: [Kindle](https://www.amazon.com/b?ie=UTF8&node=16571048011) (M)
+- [Anki](https://apps.ankiweb.net/) (M)
+- [Kindle](https://www.amazon.com/b?ie=UTF8&node=16571048011) (M)
 
 ## macOs Specific Settings
 
