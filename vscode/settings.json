@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Night Owl",
   "editor.fontFamily": "Ubuntu Mono",
   // "editor.fontWeight": "300",
   "editor.fontLigatures": true,
@@ -61,7 +60,8 @@
   "[xml]": {
     "editor.defaultFormatter": "fabianlauer.vs-code-xml-format"
   },
-  "nxConsole.showNodeVersionOnStartup": false
+  "nxConsole.showNodeVersionOnStartup": false,
+  "workbench.colorTheme": "Night Owl"
 
   // "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   // "search.exclude": {
