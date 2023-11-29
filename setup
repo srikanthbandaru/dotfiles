@@ -176,7 +176,8 @@ function install_homebrew_packages() {
 
     # Install Homebrew Casks
     local casks=(
-        "vscodium"
+        "vscodium",
+        # "raycast",
     )
 
     echo "Installing Homebrew casks..."
@@ -219,6 +220,8 @@ function install_pyenv_and_python_versions() {
     pyenv install 3.9
     echo "Installing Python 3.11..."
     pyenv install 3.11
+
+    pyenv global 3.11
 
     echo "Installation of pyenv and Python versions complete."
 }
