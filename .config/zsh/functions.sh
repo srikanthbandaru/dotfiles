@@ -62,5 +62,9 @@ function cheat_sheet() {
 function dedupeAndSortZshHistory() {
     local data
     data=$(cat $HOME/.config/zsh/.zsh_history)
-    echo "$data" | sort | awk '!a[$0]++' >$HOME/.config/zsh/.zsh_history
+    echo "$data" |
+        sed 's/git commit -m "[^"]*"/git commit -m ""/g' |
+        sort |
+        awk '!a[$0]++' \
+            >$HOME/.config/zsh/.zsh_history
 }

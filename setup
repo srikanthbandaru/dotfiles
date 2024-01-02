@@ -47,17 +47,23 @@ install_oh_my_zsh() {
     fi
 }
 
-# Show ~/Library folder
-setupMacPreferences() {
+setup_mac_preferences() {
+    # Show ~/Library folder
     echo "Setting to show ~/Library..."
     chflags nohidden ~/Library
 
     #TODO: Add home directory to Finder favorites
 
-    # Adjust Delay Until Delay
+    # Adjust initial key repeat delay
     defaults write -g InitialKeyRepeat -int 15
     # Adjust Key Repeat Rate
     defaults write -g KeyRepeat -int 2
+
+    echo "Remapping Caps Lock to Escape and Escape to Caps Lock..."
+    hidutil property --set '{"UserKeyMapping":[
+    {"HIDKeyboardModifierMappingSrc":0x700000039, "HIDKeyboardModifierMappingDst":0x700000029},
+    {"HIDKeyboardModifierMappingSrc":0x700000029, "HIDKeyboardModifierMappingDst":0x700000039}
+]}'
 }
 
 # Generate SSH Key
@@ -176,7 +182,7 @@ function install_homebrew_packages() {
 
     # Install Homebrew Casks
     local casks=(
-        "vscodium",
+        # "vscodium",
         # "raycast",
     )
 
@@ -273,20 +279,6 @@ link_dotfiles() {
         fi
     done
 
-    echo "Linking Visual Studio Code settings.json..."
-    local vscodium_settings_dir="$HOME/Library/Application Support/VSCodium/User"
-    local vscodium_settings_file="settings.json"
-
-    if [ -f "$vscodium_settings_dir/$vscodium_settings_file" ] && [ ! -L "$vscodium_settings_dir/$vscodium_settings_file" ]; then
-        mv "$vscodium_settings_dir/$vscodium_settings_file" "$vscodium_settings_dir/$vscodium_settings_file.backup"
-    fi
-
-    # Ensure the vscode directory exists in dotfiles
-    mkdir -p ~/projects/dotfiles/vscode
-    # Link the file
-    ln -sf "$current_dir/vscode/$vscodium_settings_file" "$vscodium_settings_dir/$vscodium_settings_file"
-    echo "Linked Visual Studio Code settings.json to $vscodium_settings_dir"
-
     cd "$current_dir"
 }
 
@@ -309,7 +301,7 @@ else
     show_variables
     install_command_line_tools
     install_oh_my_zsh
-    setupMacPreferences
+    setup_mac_preferences
     generate_ssh_key
     ssh_prompt_confirmation
     install_homebrew
