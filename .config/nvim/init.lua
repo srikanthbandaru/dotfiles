@@ -225,6 +225,12 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
+	{
+		"nvim-tree/nvim-tree.lua",
+		keys = {
+			{ "n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true } },
+		},
+	},
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
@@ -358,7 +364,11 @@ require("lazy").setup({
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
 				-- },
-				-- pickers = {}
+				pickers = {
+					find_files = {
+						find_command = { "rg", "--files", "--hidden", "--glob=!/.git", "--glob=!/.gitignore" }, -- This respects.gitignore rules
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
