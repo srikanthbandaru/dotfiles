@@ -173,6 +173,7 @@ function install_homebrew_packages() {
         "bat"
         "tmux"
         "zsh-autosuggestions"
+        "jq"
     )
 
     echo "Installing Homebrew formulae..."
@@ -182,8 +183,6 @@ function install_homebrew_packages() {
 
     # Install Homebrew Casks
     local casks=(
-        # "vscodium",
-        # "raycast",
     )
 
     echo "Installing Homebrew casks..."
