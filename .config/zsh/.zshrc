@@ -21,6 +21,8 @@ alias extractSubs="awk '/-->/ {g=1; next} /-->/ {g=0} g' output.en.vtt | sed -e 
 # alias code='open -a "VSCodium"'
 # alias codium='open -a "VSCodium"'
 alias v='nvim'
+alias code='open -a "Visual Studio Code"'
+alias cdLibris="cd '/Users/sri/Library/Mobile Documents/iCloud~md~obsidian/Documents/Libris'"
 
 # starship prompt
 eval "$(starship init zsh)"

@@ -1,2 +1,8 @@
 [user]
 	email = srikanthb.dev@gmail.com
+	name = Srikanth Bandaru
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
