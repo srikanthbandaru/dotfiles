@@ -225,12 +225,34 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
+	-- File tree
 	{
-		"nvim-tree/nvim-tree.lua",
-		keys = {
-			{ "n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true } },
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+			"3rd/image.nvim",
 		},
+		config = function()
+			require("neo-tree").setup({
+				filesystem = {
+					filtered_items = {
+						-- visible = true, -- Show hidden files by default
+						hide_dotfiles = false,
+						hide_gitignored = true,
+						never_show = {
+							".git",
+						},
+					},
+				},
+			})
+
+			vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-Tree" })
+		end,
 	},
+
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
