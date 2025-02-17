@@ -149,7 +149,6 @@ function install_homebrew_packages() {
     # Tap extra repositories
     local taps=(
         "oven-sh/bun"
-        "homebrew/cask-fonts"
     )
 
     echo "Tapping extra repositories..."
@@ -187,7 +186,7 @@ function install_homebrew_packages() {
         "anki"
         "font-monaspace"
         "font-ubuntu-mono-nerd-font"
-        "vscode"
+        "visual-studio-code"
         "ollama"
         "docker"
         "obsidian"
@@ -255,12 +254,20 @@ clone_dotfiles_repo() {
         return
     fi
 
+    if [[ -d "${DEST}" ]]; then
+        mkdir -p "${DEST}"
+    fi
+
     git clone git@github.com:${GHUSER}/${REPO}.git
     cd ${DIR}
 }
 
 link_dotfiles() {
     local current_dir="$PWD"
+
+    if [ ! -d ~/.config ]; then
+        mkdir ~/.config
+    fi
 
     # Linking directories in ~/.config
     echo "Linking directories to ~/.config..."
