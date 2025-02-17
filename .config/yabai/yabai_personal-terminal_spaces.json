@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "uuid": "",
+    "index": 1,
+    "label": "",
+    "type": "bsp",
+    "display": 1,
+    "windows": [
+      307,
+      13232
+    ],
+    "first-window": 307,
+    "last-window": 13232,
+    "has-focus": true,
+    "is-visible": true,
+    "is-native-fullscreen": false
+  },
+  {
+    "id": 4,
+    "uuid": "20F4A084-FB21-4E78-A2B1-C28C80D08557",
+    "index": 2,
+    "label": "",
+    "type": "bsp",
+    "display": 1,
+    "windows": [
+      186,
+      104,
+      664
+    ],
+    "first-window": 104,
+    "last-window": 186,
+    "has-focus": false,
+    "is-visible": false,
+    "is-native-fullscreen": false
+  },
+  {
+    "id": 5,
+    "uuid": "098C6339-C9DE-4A9A-A137-936A91579CBF",
+    "index": 3,
+    "label": "",
+    "type": "bsp",
+    "display": 1,
+    "windows": [],
+    "first-window": 0,
+    "last-window": 0,
+    "has-focus": false,
+    "is-visible": false,
+    "is-native-fullscreen": false
+  },
+  {
+    "id": 6,
+    "uuid": "BE140A48-631C-4742-B8FC-18E21F030DB9",
+    "index": 4,
+    "label": "",
+    "type": "bsp",
+    "display": 1,
+    "windows": [],
+    "first-window": 0,
+    "last-window": 0,
+    "has-focus": false,
+    "is-visible": false,
+    "is-native-fullscreen": false
+  },
+  {
+    "id": 7,
+    "uuid": "D3677967-F3F4-486F-9883-1B72F9D6FA2A",
+    "index": 5,
+    "label": "",
+    "type": "bsp",
+    "display": 1,
+    "windows": [],
+    "first-window": 0,
+    "last-window": 0,
+    "has-focus": false,
+    "is-visible": false,
+    "is-native-fullscreen": false
+  },
+  {
+    "id": 590,
+    "uuid": "9FBF5B2D-0342-41D8-8374-533B6A285D69",
+    "index": 6,
+    "label": "",
+    "type": "bsp",
+    "display": 2,
+    "windows": [
+      115,
+      160,
+      276
+    ],
+    "first-window": 276,
+    "last-window": 115,
+    "has-focus": false,
+    "is-visible": true,
+    "is-native-fullscreen": false
+  }
+]

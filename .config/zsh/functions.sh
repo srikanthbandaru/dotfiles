@@ -68,3 +68,68 @@ function dedupeAndSortZshHistory() {
         awk '!a[$0]++' \
             >$HOME/.config/zsh/.zsh_history
 }
+
+# save yabai layout
+function save_layout() {
+    if [ -z "$1" ]; then
+        echo "Please provide a layout name."
+        return 1
+    fi
+
+    layout_name=$1
+    yabai -m query --spaces | jq > $HOME/.config/yabai/yabai_${layout_name}_spaces.json
+    yabai -m query --windows | jq > $HOME/.config/yabai/yabai_${layout_name}_windows.json
+    echo "Layout '${layout_name}' saved."
+}
+
+# restore yabai layout
+function restore_layout() {
+    if [ -z "$1" ]; then
+        echo "Please provide a layout name."
+        return 1
+    fi
+
+    layout_name=$1
+    windows=$(cat $HOME/.config/yabai/yabai_${layout_name}_windows.json)
+
+    # to ensure that the most recently used windows are restored last
+    windows_reversed=$(echo "$windows" | jq -c '. | reverse')
+
+    attempts=3 
+    success=false
+
+    for ((i = 0; i < attempts; i++)); do
+        echo "$windows_reversed" | jq -c '.[]' | while read window; do
+            id=$(echo "$window" | jq -r '.id')
+            app=$(echo "$window" | jq -r '.app')
+            space=$(echo "$window" | jq -r '.space')
+            x=$(echo "$window" | jq -r '.frame.x')
+            y=$(echo "$window" | jq -r '.frame.y')
+            width=$(echo "$window" | jq -r '.frame.w')
+            height=$(echo "$window" | jq -r '.frame.h')
+
+            yabai -m window --focus $id
+            yabai -m window --space $space
+
+            # toggle float to move and resize if necessary
+            yabai -m window --toggle float
+            yabai -m window --move abs:$x:$y
+            yabai -m window --resize abs:$width:$height
+            yabai -m window --toggle float  
+
+        done
+        
+        # check if the restoration was successful
+        if [ $? -eq 0 ]; then
+            success=true
+            break
+        fi
+    done
+
+    if [ "$success" = true ]; then
+        echo "Layout '${layout_name}' restored successfully."
+    else
+        echo "Layout '${layout_name}' could not be restored completely. Please try again."
+    fi
+}
+

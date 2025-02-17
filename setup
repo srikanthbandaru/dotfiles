@@ -160,8 +160,8 @@ function install_homebrew_packages() {
     # Install Homebrew formulae
     local formulas=(
         "font-ubuntu-mono-nerd-font"
-        "koekeishiya/formulae/yabai"
-        "koekeishiya/formulae/skhd"
+        # "koekeishiya/formulae/yabai"
+        # "koekeishiya/formulae/skhd"
         "bun"
         "starship"
         "yt-dlp"
@@ -183,6 +183,16 @@ function install_homebrew_packages() {
 
     # Install Homebrew Casks
     local casks=(
+        "alacritty"
+        "anki"
+        "font-monaspace"
+        "font-ubuntu-mono-nerd-font"
+        "vscode"
+        "ollama"
+        "docker"
+        "obsidian"
+        "todoist"
+        "github"
     )
 
     echo "Installing Homebrew casks..."
@@ -201,8 +211,8 @@ function install_fnm_and_node_versions() {
     echo "Installing fnm..."
     brew install fnm
 
-    echo "Installing Node.js 18..."
-    fnm install 18
+    echo "Installing Node.js 22..."
+    fnm install 22
 
     echo "Installation of fnm and Node.js versions complete."
 }
@@ -308,7 +318,7 @@ else
     install_fnm_and_node_versions
     install_bun
     install_pyenv_and_python_versions
-    setup_simple_bar
+    # setup_simple_bar
     clone_dotfiles_repo
     link_dotfiles
 fi
