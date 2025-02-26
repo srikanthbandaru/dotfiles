@@ -159,8 +159,6 @@ function install_homebrew_packages() {
     # Install Homebrew formulae
     local formulas=(
         "font-ubuntu-mono-nerd-font"
-        # "koekeishiya/formulae/yabai"
-        # "koekeishiya/formulae/skhd"
         "bun"
         "starship"
         "yt-dlp"
@@ -238,13 +236,6 @@ function install_pyenv_and_python_versions() {
     pyenv global 3.11
 
     echo "Installation of pyenv and Python versions complete."
-}
-
-function setup_simple_bar() {
-    echo "Installing simple-bar..."
-    mkdir -p "$HOME/Library/Application Support/Übersicht/widgets"
-    git clone https://github.com/Jean-Tinland/simple-bar.git "$HOME/Library/Application Support/Übersicht/widgets/simple-bar"
-    sudo ln -s /opt/homebrew/bin/yabai /usr/local/bin/yabai
 }
 
 # Clone my dotfiles GitHub repository
