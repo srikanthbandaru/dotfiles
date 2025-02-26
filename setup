@@ -298,34 +298,37 @@ link_dotfiles() {
     cd "$current_dir"
 }
 
-run() {
-    local function_name=$1
-    if declare -f "$function_name" >/dev/null; then
-        echo "Running $function_name..."
-        $function_name
+# Function to list all available functions
+list_functions() {
+    declare -F | awk '{print $3}' | grep -vE "main|list_functions|execute_functions"
+}
+
+# execute selected functions
+execute_functions() {
+    local selection="$1"
+
+    if [[ "$selection" == "All" ]]; then
+        for fn in $(list_functions); do
+            echo "Executing $fn..."
+            $fn
+        done
     else
-        echo "Error: Function '$function_name' not found."
-        exit 1
+        echo "Executing $selection..."
+        $selection
     fi
 }
 
-# Check if a function name was passed as an argument
-if [ $# -gt 0 ]; then
-    run "$1"
-else
-    echo "No function specified. Running default functions..."
-    show_variables
-    install_command_line_tools
-    install_oh_my_zsh
-    setup_mac_preferences
-    generate_ssh_key
-    ssh_prompt_confirmation
-    install_homebrew
-    install_homebrew_packages
-    install_fnm_and_node_versions
-    install_bun
-    install_pyenv_and_python_versions
-    # setup_simple_bar
-    clone_dotfiles_repo
-    link_dotfiles
-fi
+main() {
+    echo "Select an option:"
+    options=("All" $(list_functions))
+    select opt in "${options[@]}"; do
+        if [[ -n "$opt" ]]; then
+            execute_functions "$opt"
+            break
+        else
+            echo "Invalid selection, try again."
+        fi
+    done
+}
+
+main
