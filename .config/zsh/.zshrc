@@ -18,9 +18,7 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # aliases
 alias downloadSubs="yt-dlp --write-auto-sub --skip-download -o "output" \$1"
 alias extractSubs="awk '/-->/ {g=1; next} /-->/ {g=0} g' output.en.vtt | sed -e 's/<[^>]*>//g' | awk 'NF' | uniq > subtitles.txt"
-# alias code='open -a "VSCodium"'
-# alias codium='open -a "VSCodium"'
-alias v='nvim'
+
 alias code='open -a "Visual Studio Code"'
 alias cdLibris="cd '/Users/sri/Library/Mobile Documents/iCloud~md~obsidian/Documents/Libris'"
 

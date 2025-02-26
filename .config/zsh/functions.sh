@@ -68,3 +68,10 @@ function dedupeAndSortZshHistory() {
         awk '!a[$0]++' \
             >$HOME/.config/zsh/.zsh_history
 }
+
+v() {
+    select config in kickstart nvchad; do
+        NVIM_APPNAME=nvim-$config nvim "$@"
+        break
+    done
+}
