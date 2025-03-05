@@ -251,6 +251,7 @@ clone_dotfiles_repo() {
 
     git clone git@github.com:${GHUSER}/${REPO}.git
     cd ${DIR}
+    git submodule update --init --recursive
 }
 
 link_dotfiles() {
