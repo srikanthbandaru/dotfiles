@@ -181,6 +181,7 @@ function install_homebrew_packages() {
     # Install Homebrew Casks
     local casks=(
         "alacritty"
+        "font-meslo-lg-nerd-font"
         "anki"
         "font-monaspace"
         "font-ubuntu-mono-nerd-font"

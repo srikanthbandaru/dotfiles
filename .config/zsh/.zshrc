@@ -10,7 +10,7 @@ if [[ -f ~/.zshrc-work ]]; then
 fi
 
 # Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto"
+alias grep='grep --color=auto'
 
 # zsh-autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -20,6 +20,8 @@ alias downloadSubs="yt-dlp --write-auto-sub --skip-download -o "output" \$1"
 alias extractSubs="awk '/-->/ {g=1; next} /-->/ {g=0} g' output.en.vtt | sed -e 's/<[^>]*>//g' | awk 'NF' | uniq > subtitles.txt"
 
 alias code='open -a "Visual Studio Code"'
+alias {v,vim,nvim}='NVIM_APPNAME=nvim-kickstart nvim'
+
 alias cdLibris="cd '/Users/sri/Library/Mobile Documents/iCloud~md~obsidian/Documents/Libris'"
 
 # starship prompt
