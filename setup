@@ -4,7 +4,7 @@ set -e -u
 # Configurations
 GHUSER=${GHUSER:-srikanthbandaru}
 REPO=${REPO:-dotfiles}
-DEST=${DEST:-${HOME}/projects}
+DEST=${DEST:-${HOME}/code}
 DIR="${DEST}/${REPO}"
 SSH_KEY_TYPE="ed25519"
 SSH_KEY_PATH="${HOME}/.ssh/id_${SSH_KEY_TYPE}"
@@ -181,6 +181,7 @@ function install_homebrew_packages() {
     # Install Homebrew Casks
     local casks=(
         "alacritty"
+        "ghostty"
         "font-meslo-lg-nerd-font"
         "anki"
         "font-monaspace"
@@ -270,7 +271,7 @@ link_dotfiles() {
 
     # Linking directories in ~/.config
     echo "Linking directories to ~/.config..."
-    cd ~/projects/dotfiles/.config
+    cd ~/code/dotfiles/.config
     for dir in *; do
         # Check if symlink or directory doesn't already exist
         if [ ! -e ~/.config/"$dir" ]; then
@@ -283,7 +284,7 @@ link_dotfiles() {
 
     # Linking individual dotfiles to ~
     echo "Linking dotfiles to home directory..."
-    for file in ~/projects/dotfiles/.*; do
+    for file in ~/code/dotfiles/.*; do
         base_name=$(basename "$file")
         # Check if it's a file and doesn't already exist in ~
         if [ -f "$file" ] && [ ! -e ~/"$base_name" ]; then

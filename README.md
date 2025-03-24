@@ -54,7 +54,7 @@ Automate your macOS developer environment setup with this convenient bash script
 6. Go To System Settings > Desktop & Dock > Mission Control
 7. Turn off “Automatically Rearrange Spaces Based On Most Recent Use”
    Personally, I only keep “Displays Have Separate Spaces” turned on here, and that’s what I’d recommend
-8. Set home folder and projects folder to finder favorites
+8. Set home folder and code folder to finder favorites
 
 ## Usage
 
