@@ -37,6 +37,26 @@ fuzzy_navigate
 key = "F"
 mods = "Control"
 
+[[keyboard.bindings]]
+chars = "\u001bh"
+key = "H"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001bl"
+key = "L"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001bj"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001bk"
+key = "K"
+mods = "Alt"
+
 [window]
 # decorations = "buttonless"
 dynamic_padding = false
