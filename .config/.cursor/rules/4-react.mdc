@@ -1,0 +1,15 @@
+---
+description: React best practices including components, hooks, state, performance, and accessibility.
+globs: ["**/*.tsx", "**/*.jsx", "**/components/**/*", "**/hooks/**/*"] 
+---
+
+# React Best Practices
+
+* **Functional Components & Hooks:** Prefer functional components with Hooks. Follow Rules of Hooks. Extract logic to custom hooks.
+* **Component Structure:** Keep components small, focused, composable. Define prop types clearly (TypeScript interfaces).
+* **State Management:** Use `useState` (local), `useReducer` (complex local), Context API (sparingly for shared state). Keep state localized. Consider libraries (Zustand, Jotai, TanStack Query) for complex needs.
+* **Performance:** Use `React.memo`, `useMemo`, `useCallback` appropriately. Use proper `key` props. Use `React.lazy` / `Suspense` for code splitting. Profile when needed.
+* **Forms:** Use controlled components. Implement client/server validation (e.g., with Zod). Handle loading/error/success states. Ensure accessibility.
+* **Error Handling:** Use Error Boundaries. Handle async errors gracefully.
+* **Accessibility (A11y):** Use semantic HTML. Implement ARIA correctly. Ensure keyboard navigation/focus management. Provide alt text.
+* **Code Organization:** Group related files. Use clear naming. Co-locate styles or keep nearby

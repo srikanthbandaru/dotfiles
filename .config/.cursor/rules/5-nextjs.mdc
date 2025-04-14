@@ -1,0 +1,16 @@
+---
+description: Best practices for Next.js applications, focusing on App Router, components, data fetching, and performance.
+globs: ["**/*.tsx", "**/*.ts", "src/**/*.ts", "src/**/*.tsx", "app/**/*"] 
+---
+
+# Next.js Best Practices
+
+* **App Router:** Default to App Router (`app/`). Use conventions for layouts, pages, loading, error UI.
+* **Server Components (RSC):** Use RSC by default. Opt into Client Components (`'use client'`) only when interactivity/browser APIs/hooks are needed.
+* **Client Components:** Keep small. Use `'use client'`. Wrap in `Suspense` boundaries. Lift content up by passing Server Component children.
+* **Data Fetching:** Fetch in RSC (`async/await`). Handle loading/errors ( `loading.tsx`, `error.tsx`, `Suspense`). Use Next.js caching/revalidation.
+* **Performance:** Optimize images (`next/image`). Use dynamic imports (`next/dynamic`). Leverage RSC. Implement caching.
+* **Routing:** Use file-system routing, dynamic routes, route groups, parallel routes. Implement `loading.tsx`, `error.tsx`.
+* **Forms & Validation:** Use Zod for validation (client/server via Server Actions/Route Handlers). Handle form states.
+* **State Management:** Minimize client state. Use URL state. Use Context/libraries judiciously for client global state.
+* **Structure:** Use `app/` for routes, `components/` for shared UI, `lib/` for utilities

@@ -1,0 +1,23 @@
+---
+description: Best practices for database interactions, focusing on Prisma and Supabase patterns.
+globs: ["prisma/**/*", "src/db/**/*", "**/*.prisma", "supabase/**/*", "src/lib/db.ts"] 
+---
+
+# Database Best Practices (Prisma/Supabase Focus)
+
+## Schema & Migrations
+* **Schema Design:** Use normalization, appropriate types, clear relations (`@relation`), indices (`@index`/`@@index`), constraints (`@unique`/`@@unique`).
+* **Migrations:** Use migration tools consistently (e.g., `prisma migrate dev`). Keep migrations manageable and version controlled.
+
+## Prisma Specific
+* **Client:** Use a shared Prisma Client instance.
+* **Queries:** Select only needed fields (`select`/`include`). Avoid N+1 (use `include` or optimized queries). Use transactions (`$transaction`). Implement pagination (`skip`/`take`). Use aggregations.
+
+## Supabase Specific
+* **Security:** Implement Row Level Security (RLS) rigorously. Configure auth properly. Manage roles/permissions. Secure API keys.
+* **Features:** Leverage PostgreSQL features, DB functions, Realtime subscriptions (efficiently), Storage (with access controls).
+
+## General DB Practices
+* **Performance:** Optimize queries (indexing, selective fields). Use connection pooling (usually managed). Consider caching. Monitor performance.
+* **Security:** Protect against SQL injection (ORMs help, be careful with raw SQL). Secure credentials (env vars). Implement app-level auth/authz. Backup data.
+* **Error Handling:** Handle connection errors, query errors, constraint violations gracefully

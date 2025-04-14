@@ -1,0 +1,17 @@
+---
+description: General principles for writing clean, maintainable, and readable code.
+globs: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.py"] 
+---
+
+# Code Quality Principles (General)
+
+* **Meaningful Naming:** Use clear, descriptive, and intention-revealing names for variables, functions, classes, types, etc. Avoid overly generic names or cryptic abbreviations.
+* **Single Responsibility Principle (SRP):** Ensure functions, methods, and classes have one primary, well-defined responsibility. Keep them small and focused.
+* **DRY (Don't Repeat Yourself):** Avoid code duplication. Extract repeated logic into reusable functions, components, or abstractions. Maintain single sources of truth.
+* **Readability & Structure:** Organize code logically. Keep related logic together. Use consistent formatting, file/folder structures, and naming conventions. Code should be easy to follow.
+* **Constants Over Magic Values:** Replace hard-coded literal values (magic numbers, strings) with named constants that explain their purpose. Define constants appropriately.
+* **Effective Comments:** Write comments to explain the *why* (rationale, complex logic, trade-offs), not the *what*. Document APIs, non-obvious behaviors, and workarounds. Code should be self-documenting where possible.
+* **Encapsulation:** Hide internal implementation details. Expose clear and minimal interfaces.
+* **Continuous Improvement:** Embrace refactoring to improve clarity, performance, or maintainability. Address technical debt proactively. Aim to leave code cleaner.
+* **Testing Context:** Be mindful of testability. Write code that is easily testable.
+* **Version Control Context:** Generate changes that align with good practices like small, atomic commits

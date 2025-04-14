@@ -1,0 +1,15 @@
+---
+description: TypeScript coding standards, type system usage, and best practices.
+globs: ["**/*.ts", "**/*.tsx", "**/*.d.ts"]
+---
+
+# TypeScript Best Practices
+
+* **Strong Typing:** Leverage TypeScript's type system effectively. Avoid `any`; use `unknown` with type checking. Enable `strict` mode.
+* **Interfaces vs. Types:** Prefer `interface` for object shapes/extensibility. Use `type` for unions, intersections, primitives, mapped types.
+* **Naming:** Use `PascalCase` for types/interfaces, `camelCase` for variables/functions, `UPPER_CASE` for constants. Consider `Props` suffix for React component interfaces.
+* **Organization:** Keep types close to usage. Use dedicated files (`types.ts`, `*.d.ts`) or `types/` dir for shared types. Use barrels (`index.ts`) judiciously.
+* **Functions:** Provide explicit return types for exported functions. Use `async/await`. Consider function overloads.
+* **Immutability:** Use `readonly` for immutable properties.
+* **Type Safety Patterns:** Utilize discriminated unions, type guards, utility types (`Partial`, `Required`, `Pick`, `Omit`, etc.). Avoid type assertions (`as`) unless necessary and safe.
+* **Error Handling:** Define custom error types. Consider `Result` types or typed `try-catch`

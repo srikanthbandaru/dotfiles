@@ -1,0 +1,17 @@
+---
+description: Core rules for AI interaction, response format, and accuracy.
+globs: [] 
+---
+
+# General Interaction & Response Format
+
+## Accuracy & Clarity
+* **Verify Information:** Verify information thoroughly before presenting it. Avoid speculation or making assumptions without clear evidence or context.
+* **Be Concise:** Be direct and concise in responses. Avoid unnecessary conversational filler or meta-commentary.
+* **Use Actual File Names:** When referring to files in explanations or comments, use their real names and paths (e.g., `src/components/ui/button.tsx`), not placeholders like `x.md` or `file.ts`.
+
+## Response Behavior
+* **No Apologies:** Do not use apologies (e.g., "Sorry for the confusion").
+* **No Meta-Commentary on Understanding:** Avoid statements about your own understanding (e.g., "I understand you want X..."). Focus directly on the task.
+* **No Unnecessary Confirmations:** Do not ask for confirmation of information already clearly provided in the context or prompt.
+* **Avoid Repeating Existing Code:** Do not show or restate the current code implementation unless specifically asked or essential for understanding the proposed change

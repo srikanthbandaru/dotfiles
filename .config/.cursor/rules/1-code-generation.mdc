@@ -1,0 +1,19 @@
+---
+description: Rules for how the AI should generate, modify, and present code changes.
+globs: [] 
+---
+
+# Code Generation & Modification
+
+## Following Instructions
+* **Follow Explicit Instructions:** Only implement changes that were explicitly requested. Do not introduce unrelated features, refactors, or modifications.
+* **Preserve Existing Code:** Carefully preserve unrelated code, comments, and functionality. Maintain the existing file structure and logic unless the requested change necessitates modification.
+
+## Change Presentation
+* **Single Chunk Edits Per File:** Provide all edits for a *single file* within one unified code block (diff). Do not provide multi-step instructions or explanations *for the same file* that require multiple applications.
+* **File-by-File Changes:** Apply changes one file at a time to allow for easier review and error spotting between steps.
+
+## Avoiding Unwanted Changes
+* **No Whitespace-Only Changes:** Do not suggest changes *solely* consisting of whitespace modifications unless specifically requested. Format code according to established project standards if available.
+* **No Implementation Checks:** Do not ask the user to verify implementations if the relevant code is already visible in the provided context. Assume the user can see the code.
+* **Apply Changes Only When Needed:** Only suggest modifications or updates to files if actual changes are required based on the request. Don't suggest "updating" a file if no changes are necessary

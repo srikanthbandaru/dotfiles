@@ -1,0 +1,16 @@
+---
+description: Best practices for using Tailwind CSS effectively and maintainably.
+globs: ["**/*.css", "**/*.tsx", "**/*.jsx", "tailwind.config.js", "tailwind.config.ts"]
+---
+
+# Tailwind CSS Best Practices
+
+* **Utility-First:** Primarily use utility classes in markup. Avoid premature abstraction.
+* **Configuration:** Configure `tailwind.config.js` effectively (theme extension, content purging, plugins).
+* **Component Styling:** Group related utilities. Use `@apply` sparingly for complex, repeated patterns or third-party styles, not general styling.
+* **Responsive Design:** Use responsive modifiers (`sm:`, `md:`, etc.) mobile-first.
+* **State Variants:** Utilize `hover:`, `focus:`, `disabled:`, `dark:` effectively.
+* **Layout:** Leverage Flexbox (`flex`) and Grid (`grid`) utilities. Use theme spacing (`p-*`, `m-*`, `space-*`) consistently.
+* **Consistency:** Adhere to defined theme values (colors, spacing).
+* **UI Libraries:** Apply utilities according to patterns of libraries like shadcn/ui, Radix, Headless UI.
+* **Performance:** Ensure correct `content` config for purging unused styles. Minimize custom CSS
