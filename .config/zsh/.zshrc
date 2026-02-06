@@ -19,6 +19,8 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 alias downloadSubs="yt-dlp --write-auto-sub --skip-download -o "output" \$1"
 alias extractSubs="awk '/-->/ {g=1; next} /-->/ {g=0} g' output.en.vtt | sed -e 's/<[^>]*>//g' | awk 'NF' | uniq > subtitles.txt"
 
+alias dr-n8n="docker run -it --rm --name n8n -p 5678:5678 -v /Users/sri/code/rushfinds.com/data/n8n:/home/node/.n8n docker.n8n.io/n8nio/n8n"
+
 alias code='open -a "Visual Studio Code"'
 alias {v,vim,nvim}='NVIM_APPNAME=nvim-kickstart nvim'
 
@@ -35,3 +37,20 @@ setopt nomatch
 
 # bun completions
 [ -s "/Users/glkni/.bun/_bun" ] && source "/Users/glkni/.bun/_bun"
+
+# sqlite
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+# for compilers to find sqlite
+export LDFLAGS="-L/opt/homebrew/opt/sqlite/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/sqlite/include"
+
+# for pkg-config to find sqlite
+export PKG_CONFIG_PATH="/opt/homebrew/opt/sqlite/lib/pkgconfig"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/sri/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+export PATH="$HOME/.local/bin:$PATH"

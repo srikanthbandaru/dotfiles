@@ -6,15 +6,15 @@
 # ============================================================================
 #
 # SETUP (new machine):
-#   chmod +x ~/projects/dotfiles/break-reminder.sh
-#   ~/projects/dotfiles/break-reminder.sh install
+#   chmod +x ~/code/dotfiles/break-reminder.sh
+#   ~/code/dotfiles/break-reminder.sh install
 #
 # USEFUL COMMANDS:
-#   Install:           ~/projects/dotfiles/break-reminder.sh install
-#   Uninstall:         ~/projects/dotfiles/break-reminder.sh uninstall
+#   Install:           ~/code/dotfiles/break-reminder.sh install
+#   Uninstall:         ~/code/dotfiles/break-reminder.sh uninstall
 #   Stop reminders:    launchctl unload ~/Library/LaunchAgents/com.user.breakreminder.plist
 #   Start reminders:   launchctl load ~/Library/LaunchAgents/com.user.breakreminder.plist
-#   Test manually:     ~/projects/dotfiles/break-reminder.sh
+#   Test manually:     ~/code/dotfiles/break-reminder.sh
 #   Check status:      launchctl list | grep breakreminder
 #
 # CHANGE SCHEDULE:
@@ -28,7 +28,7 @@
 # NOTE: Automatically starts on login. No need to re-run after restart!
 # ============================================================================
 
-SCRIPT_PATH="$HOME/projects/dotfiles/break-reminder.sh"
+SCRIPT_PATH="$HOME/code/dotfiles/break-reminder.sh"
 PLIST_PATH="$HOME/Library/LaunchAgents/com.user.breakreminder.plist"
 
 install_launchagent() {
